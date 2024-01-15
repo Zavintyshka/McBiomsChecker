@@ -1,0 +1,4 @@
+file_logger [INFO] -- 15-01-2024 02:05:58 -- Создан файл эталона по пути files/temp/a45e3cb2-644d-4f7b-9a1b-7ab32cc87582.json
+file_logger [INFO] -- 15-01-2024 02:09:37 -- Удален файл эталона по пути file files/game_bioms/bioms_for_1.20.json
+file_logger [INFO] -- 15-01-2024 02:12:11 -- Создан файл эталона по пути files/game_bioms/bioms_for_1.20.json
+file_logger [INFO] -- 15-01-2024 02:12:23 -- Удален файл эталона по пути file files/game_bioms/bioms_for_1.20.json
