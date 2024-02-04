@@ -4,6 +4,8 @@ from settings import *
 from general_funcs import make_bioms_list, get_bioms_list
 from logger import db_logger, admin_logger
 
+from core.types import AvailableLanguages
+
 
 class DbInterface:
     """The parent class for database management"""
@@ -37,6 +39,7 @@ class DbInterface:
 
 class AdminDB(DbInterface):
     """ Child class of DbInterface that helps manage db's admin part"""
+
     def get_game_file_path(self, game_version: str):
         query = 'SELECT path_to_json FROM {} WHERE game_version=?'.format(DB_ADMIN_TABLE_NAME)
         data = self.base.execute(query, (game_version,)).fetchall()
@@ -67,6 +70,7 @@ class AdminDB(DbInterface):
 
 class UserDB(DbInterface):
     """ Child class DbInterface that helps user interact with DB"""
+
     def create_user(self, tg_id, user_language: str, is_admin: bool):
         user_uuid = str(uuid1())
         query = 'INSERT INTO {} (user_uuid, tg_id, user_language, admin) VALUES (?,?,?,?)'.format(DB_USER_TABLE_NAME)
@@ -84,10 +88,15 @@ class UserDB(DbInterface):
         return self.base.execute(query).fetchall()[0][0]
         # TODO сделать обработку ^
 
-    def get_user_language(self, tg_id: str):
+    def get_user_language(self, tg_id: str) -> AvailableLanguages | None:
         query = 'SELECT user_language FROM {} WHERE tg_id=?'.format(DB_USER_TABLE_NAME)
-        response = self.base.execute(query, (tg_id,)).fetchall()
-        return response[0][0]
+        raw_response = self.base.execute(query, (tg_id,)).fetchall()
+        db_logger.info(f'Get language for {tg_id}')
+        if not raw_response:
+            return None
+        else:
+            language: str = raw_response[0][0]
+            return AvailableLanguages(language)
 
     def change_language(self, tg_id: str, language: str):
         query = 'UPDATE {} SET user_language = ? WHERE tg_id = ?'.format(DB_USER_TABLE_NAME)
@@ -103,6 +112,7 @@ class UserDB(DbInterface):
 
 class MapsDB(DbInterface):
     """ Child class of DbInterface that helps keep user map records in DB"""
+
     def add_map(self, map_name: str, map_version: str, user_uuid: str, json_file: str):
         map_uuid = str(uuid1())
         make_bioms_list(map_uuid)(get_bioms_list)(json_file)
@@ -133,7 +143,7 @@ admin_db = AdminDB()
 
 
 def main():
-    pass
+    print(user_db.get_user_language('720262392'))
 
 
 if __name__ == '__main__':

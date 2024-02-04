@@ -4,6 +4,7 @@ from bot_initialize import bot
 from logger import bot_logger
 from core.handlers import *
 from core.fsm import *
+from core.middlewares import *
 
 
 async def start_bot():
@@ -19,6 +20,8 @@ async def shutdown():
 dp = Dispatcher()
 dp.startup.register(start_bot)
 dp.shutdown.register(shutdown)
+
+dp.message.middleware.register(LanguageMiddleware())
 
 registrate_admin_fsm_handlers(dp)
 registrate_user_fsm_handlers(dp)

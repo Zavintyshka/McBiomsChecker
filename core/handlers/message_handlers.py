@@ -6,7 +6,11 @@ from keyboardbuilder import make_reg_inline_keyboard, make_map_list_keyboard, ma
     first_map_keyboard
 from logger import db_logger
 
+from redis import Redis
+
 __all__ = ['registrate_message_handlers']
+
+my_redis = Redis(host='localhost', port=6379)
 
 
 async def new_user(msg: Message):
@@ -21,7 +25,8 @@ async def new_user(msg: Message):
         await msg.answer('Выберете язык', reply_markup=builder.as_markup())
 
 
-async def help_command(msg: Message):
+async def help_command(msg: Message, language: str):
+    await msg.answer(language)
     message = r"""Бот позволяет отслеживать ваш прогресс выполнения достижения <b>Adventuring Time</b>
 Для начала найдите вашу карту на компьютере.
 Стандартные пути
@@ -68,15 +73,8 @@ async def delete_advancement(msg: Message):
         await msg.answer('Вы не являетесь администратором, чтобы пользоваться этой функцией.')
 
 
-translate = {'RU': "Это эхо функция", 'EN': "It's an echo function"}
-
-
-async def echo_func(msg: Message, some_list: list[int]):
-    some_list.append(1)
-    await msg.answer(str(some_list))
-
-
-async def change_language(msg: Message):
+async def change_language(msg: Message, language: str):
+    await msg.answer(language)
     builder = make_reg_inline_keyboard()
     await msg.answer('Choose language', reply_markup=builder.as_markup())
 
@@ -84,7 +82,6 @@ async def change_language(msg: Message):
 def registrate_message_handlers(dp: Dispatcher):
     dp.message.register(new_user, Command(commands='start'))
     dp.message.register(change_language, Command(commands='change_language'))
-    dp.message.register(echo_func, Command(commands='black'))
     dp.message.register(help_command, Command(commands='help'))
     dp.message.register(map_list, Command(commands='map_list'))
     dp.message.register(delete_map_menu, Command(commands=['delete_map', 'del_map']))
