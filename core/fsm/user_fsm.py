@@ -1,13 +1,16 @@
+from uuid import uuid4
+from aiogram import Dispatcher
 from aiogram.fsm.state import StatesGroup, State
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 from aiogram.filters import StateFilter, Command
-from aiogram import Dispatcher
-from db_funcs import user_db, maps_db
-from check_conditions import is_user_exist
-from settings import PATH_TO_TEMP_FILES
 from bot_initialize import bot
+from db_funcs import user_db, maps_db
+from settings import PATH_TO_TEMP_FILES
 from keyboardbuilder import make_cancel_button
+
+
+__all__ = ['registrate_user_fsm_handlers', 'add_map']
 
 
 # add_map
@@ -17,14 +20,21 @@ class AddMap(StatesGroup):
     json_file = State()
 
 
-async def add_map(msg: Message, state: FSMContext):
-    tg_id = msg.from_user.id
+async def add_map(msg_or_callback: Message | CallbackQuery, state: FSMContext):
     builder = make_cancel_button()
-    if is_user_exist(tg_id):
-        await msg.answer('Введите название вашей карты', reply_markup=builder.as_markup())
-        await state.set_state(AddMap.map_name)
-    else:
-        await msg.answer('У вас нет личного кабинета. Используйте команду /create_user, чтобы создать личный кабинет.')
+    if isinstance(msg_or_callback, CallbackQuery):
+        tg_id = msg_or_callback.from_user.id
+        if user_db.is_user_exists(tg_id):
+            await msg_or_callback.message.answer('Введите название вашей карты', reply_markup=builder.as_markup())
+            await state.set_state(AddMap.map_name)
+
+    elif isinstance(msg_or_callback, Message):
+        tg_id = msg_or_callback.from_user.id
+        if user_db.is_user_exists(tg_id):
+            await msg_or_callback.answer('Введите название вашей карты', reply_markup=builder.as_markup())
+            await state.set_state(AddMap.map_name)
+        else:
+            await msg_or_callback.answer('Сначала используйте команду /start перед добавлением карт или кнопкой снизу')
 
 
 async def map_version(msg: Message, state: FSMContext):
@@ -50,14 +60,14 @@ async def end_add_map(msg: Message, state: FSMContext):
     _map_version = map_data['map_version']
     _user_uuid = user_db.get_user_uuid(tg_id)
     _json_file = map_data['json_file']
-    path = PATH_TO_TEMP_FILES + 'temp1.json'
+    path = PATH_TO_TEMP_FILES + f'{str(uuid4())}.json'
     await bot.download(_json_file, path)
     maps_db.add_map(_map_name, _map_version, _user_uuid, path)
     await msg.answer('Карта была добавлена в ваш личный кабинет')
     await state.clear()
 
 
-def register_fsm_handlers(dp: Dispatcher):
+def registrate_user_fsm_handlers(dp: Dispatcher):
     dp.message.register(add_map, StateFilter(None), Command(commands='add_map'))
     dp.message.register(map_version, StateFilter(AddMap.map_name))
     dp.message.register(json_file, StateFilter(AddMap.map_version))

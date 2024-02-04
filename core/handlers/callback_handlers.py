@@ -2,24 +2,31 @@ from aiogram import Dispatcher, F
 from aiogram.types import CallbackQuery
 from logger import db_logger, file_logger
 from db_funcs import user_db, maps_db, admin_db
-from general_func import load_bioms_list, delete_file
 from settings import *
-from keyboardbuilder import make_back_btn, make_map_list_keyboard
-from general_func import generate_content, delete_player_map
+from keyboardbuilder import back_keyboard, make_map_list_keyboard
+from general_funcs import load_bioms_list, generate_content, delete_file
 from aiogram.fsm.context import FSMContext
+from core.fsm import *
+
+__all__ = ['registrate_callback_handlers']
 
 
 async def language_buttons(callback: CallbackQuery):
-    _, language = callback.data.split('_')
     tg_id = str(callback.from_user.id)
-    user_db.create_user(tg_id, language, tg_id in ADMIN_ID_SET)
-    await callback.message.delete()
-    await callback.message.answer('Ваша учетная запись успешна добавлена на сервер')
+    _, language = callback.data.split('_')
+    if user_db.is_user_exists(tg_id):
+        user_db.change_language(tg_id, language)
+        await callback.message.answer(f'Вы выбрали язык {language}')
+    else:
+        user_db.create_user(tg_id, language, tg_id in ADMIN_ID_SET)
+        await callback.message.delete()
+        await callback.message.answer(
+            'Самое время добавить карту с помощью команды /add_map')
 
 
 async def info_about_maps_buttons(callback: CallbackQuery):
     _, map_uuid, map_version = callback.data.split('_')
-    builder = make_back_btn()
+    builder = back_keyboard()
     try:
         game_data = load_bioms_list(PATH_TO_MC_BIOMS + admin_db.get_game_file_path(map_version))
     except IndexError:
@@ -35,11 +42,9 @@ async def info_about_maps_buttons(callback: CallbackQuery):
 
 async def delete_map_buttons(callback: CallbackQuery):
     _, map_uuid, _ = callback.data.split('_')
-    await callback.answer(f'будем удалять карту с {map_uuid=}')
-
     maps_db.delete_map(map_uuid)
-    delete_player_map(map_uuid)
-
+    path = PATH_TO_PLAYERS_PROGRESS + map_uuid + '.json'
+    delete_file(path)
     await callback.message.delete()
     await callback.message.answer('Карта успешно удалена')
 
@@ -55,9 +60,10 @@ async def delete_record_buttons(callback: CallbackQuery):
     _, game_version, file = callback.data.split('+')
     path = PATH_TO_MC_BIOMS + file
     delete_file(path)
-    file_logger.info(f'Удален файл эталона по пути file {path}')
+    file_logger.info(f'The standard file in path {path} has been deleted')
     admin_db.del_data(game_version)
-    db_logger.info(f'Удален из БД эталон версии {game_version} администратором с id={callback.from_user.id}')
+    db_logger.info(f'The standard record {game_version=} has been deleted by admin id={callback.from_user.id}')
+    db_logger.info(f'The standard file {game_version=} has been deleted by admin id={callback.from_user.id}')
     await callback.message.delete()
     await callback.message.answer(f'Эталонный файл {file} был удален')
 
@@ -68,10 +74,15 @@ async def reset_fsm_button(callback: CallbackQuery, state: FSMContext):
     await callback.answer('Действие отменено')
 
 
-def register_callback_handlers(dp: Dispatcher):
+async def first_map_btn(callback: CallbackQuery, state: FSMContext):
+    await add_map(callback, state)
+
+
+def registrate_callback_handlers(dp: Dispatcher):
     dp.callback_query.register(language_buttons, F.data.contains('language'))
     dp.callback_query.register(info_about_maps_buttons, F.data.contains('map-list'))
     dp.callback_query.register(delete_map_buttons, F.data.contains('delete-map'))
     dp.callback_query.register(delete_record_buttons, F.data.contains('del-advancement'))
     dp.callback_query.register(back_to_map_list, F.data == 'back_to_menu')
     dp.callback_query.register(reset_fsm_button, F.data == 'cancel')
+    dp.callback_query.register(first_map_btn, F.data == 'first_map')
