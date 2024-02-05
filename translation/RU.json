@@ -24,5 +24,8 @@
   "USE_START_COMMAND_BEFORE": "Сначала используйте команду /start перед добавлением карт или кнопкой снизу",
   "INPUT_MAP_VERSION": "Введите версию карты",
   "INPUT_MAP_JSON": "Перетащите json-файл",
-  "MAP_SUCCESSFULLY_ADDED": "Карта была успешно добавлена"
+  "MAP_SUCCESSFULLY_ADDED": "Карта была успешно добавлена",
+  "INPUT_STANDARD_JSON": "Перетащите эталонный json-файл",
+  "STANDARD_FILE_ALREADY_EXISTS": "Вы пытаетесь добавить эталон версии {_game_version}, которая уже существует.\nДействие отменено",
+  "STANDARD_FILE_SUCCESSFULLY_ADDED": "Эталонный файл с версией {_game_version} был успешно добавлен"
 }

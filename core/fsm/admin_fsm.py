@@ -11,7 +11,8 @@ from bot_initialize import bot
 from general_funcs import get_bioms_list, make_bioms_list
 from logger import db_logger
 from keyboardbuilder import make_cancel_button
-from core.types import AvailableLanguages
+from core.types import AvailableLanguages, MessageHandlersAnswers, UserFSMLocalization, AdminFSMLocalization
+from locale import get_locale
 
 __all__ = ['registrate_admin_fsm_handlers']
 
@@ -24,16 +25,19 @@ class AddAdvancement(StatesGroup):
 async def add_advancement(msg: Message, state: FSMContext, language: AvailableLanguages):
     if admin_db.is_admin(msg.from_user.id):
         builder = make_cancel_button(language)
-        await msg.answer('Введите версию игры', reply_markup=builder.as_markup())
+        text = get_locale(UserFSMLocalization.INPUT_MAP_VERSION, language)
+        await msg.answer(text, reply_markup=builder.as_markup())
         await state.set_state(AddAdvancement.game_version)
     else:
-        await msg.answer('Вы не являетесь администратором, чтобы пользоваться этой функцией.')
+        text = get_locale(MessageHandlersAnswers.YOURE_NOT_AN_ADMIN, language)
+        await msg.answer(text)
 
 
 async def receive_json_file(msg: Message, state: FSMContext, language: AvailableLanguages):
     await state.update_data(game_version=msg.text)
     builder = make_cancel_button(language)
-    await msg.answer('Загрузите эталонный json-файл', reply_markup=builder.as_markup())
+    text = get_locale(AdminFSMLocalization.INPUT_STANDARD_JSON, language)
+    await msg.answer(text, reply_markup=builder.as_markup())
     await state.set_state(AddAdvancement.json_file_id)
 
 
@@ -49,11 +53,12 @@ async def end_add_advancement(msg: Message, state: FSMContext, language: Availab
         make_bioms_list(_game_version)(get_bioms_list)(path)
         await admin_db.create_game_record(_game_version, ADVANCEMENTS_FILE_NAME + _game_version + '.json')
     except (sqlite3.IntegrityError, FileExistsError):
-        await msg.answer(
-            f'Вы пытаетесь добавить эталон версии {_game_version}, которая уже существует.\nДействие отменено')
+        text = get_locale(AdminFSMLocalization.STANDARD_FILE_ALREADY_EXISTS, language)
+        await msg.answer(text.format(_game_version=_game_version))
     else:
         db_logger.info(f'The standard record {_game_version=} has been added by admin id={msg.from_user.id}')
-        await msg.answer(f'Карта с версией {_game_version} была добавлена в архив версий')
+        text = get_locale(AdminFSMLocalization.STANDARD_FILE_SUCCESSFULLY_ADDED, language)
+        await msg.answer(text.format(_game_version=_game_version))
     finally:
         await state.clear()
 

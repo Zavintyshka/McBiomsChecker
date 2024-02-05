@@ -24,7 +24,10 @@
   "USE_START_COMMAND_BEFORE": "First use the /start command before adding maps or the inline-button at the bottom",
   "INPUT_MAP_VERSION": "Input map version",
   "INPUT_MAP_JSON": "Drag and drop your json-file",
-  "MAP_SUCCESSFULLY_ADDED": "Map was successfully added"
+  "MAP_SUCCESSFULLY_ADDED": "Map was successfully added",
+  "INPUT_STANDARD_JSON": "Input the standard json-file",
+  "STANDARD_FILE_ALREADY_EXISTS": "You're trying to add the standard map version of {_game_version} that already exists.\nAction canceled",
+  "STANDARD_FILE_SUCCESSFULLY_ADDED": "The standard file {_game_version} was successfully added"
 }
 
 
