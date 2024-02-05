@@ -34,7 +34,7 @@ async def language_buttons(callback: CallbackQuery):
 
 async def info_about_maps_buttons(callback: CallbackQuery, language: AvailableLanguages):
     _, map_uuid, map_version = callback.data.split('_')
-    builder = back_keyboard()
+    builder = back_keyboard(language)
     try:
         game_data = load_bioms_list(PATH_TO_MC_BIOMS + admin_db.get_game_file_path(map_version))
     except IndexError:
@@ -87,8 +87,8 @@ async def reset_fsm_button(callback: CallbackQuery, state: FSMContext, language:
     await callback.answer(answer)
 
 
-async def first_map_btn(callback: CallbackQuery, state: FSMContext):
-    await add_map(callback, state)
+async def first_map_btn(callback: CallbackQuery, state: FSMContext, language: AvailableLanguages):
+    await add_map(callback, state, language)
 
 
 def registrate_callback_handlers(dp: Dispatcher):

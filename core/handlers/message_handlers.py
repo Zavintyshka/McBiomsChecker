@@ -36,7 +36,7 @@ async def map_list(msg: Message, language: AvailableLanguages):
     db_logger.info(f'Receiving map list for user: id ={tg_id}')
 
     if not response:
-        builder = first_map_keyboard()
+        builder = first_map_keyboard(language)
         answer = get_locale(MessageHandlersAnswers.NO_MAP_LETS_ADD_MSG, language)
         await msg.answer(answer, reply_markup=builder.as_markup())
     else:

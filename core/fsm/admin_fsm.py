@@ -11,6 +11,7 @@ from bot_initialize import bot
 from general_funcs import get_bioms_list, make_bioms_list
 from logger import db_logger
 from keyboardbuilder import make_cancel_button
+from core.types import AvailableLanguages
 
 __all__ = ['registrate_admin_fsm_handlers']
 
@@ -20,23 +21,23 @@ class AddAdvancement(StatesGroup):
     json_file_id = State()
 
 
-async def add_advancement(msg: Message, state: FSMContext):
+async def add_advancement(msg: Message, state: FSMContext, language: AvailableLanguages):
     if admin_db.is_admin(msg.from_user.id):
-        builder = make_cancel_button()
+        builder = make_cancel_button(language)
         await msg.answer('Введите версию игры', reply_markup=builder.as_markup())
         await state.set_state(AddAdvancement.game_version)
     else:
         await msg.answer('Вы не являетесь администратором, чтобы пользоваться этой функцией.')
 
 
-async def receive_json_file(msg: Message, state: FSMContext):
+async def receive_json_file(msg: Message, state: FSMContext, language: AvailableLanguages):
     await state.update_data(game_version=msg.text)
-    builder = make_cancel_button()
+    builder = make_cancel_button(language)
     await msg.answer('Загрузите эталонный json-файл', reply_markup=builder.as_markup())
     await state.set_state(AddAdvancement.json_file_id)
 
 
-async def end_add_advancement(msg: Message, state: FSMContext):
+async def end_add_advancement(msg: Message, state: FSMContext, language: AvailableLanguages):
     file_id = msg.document.file_id
     await state.update_data(json_file_id=file_id)
     map_data = await state.get_data()

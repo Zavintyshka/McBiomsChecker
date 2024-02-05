@@ -29,3 +29,8 @@ class CallbackQueriesAnswers(Enum):
     STANDARD_FILE_DELETED = 'STANDARD_FILE_DELETED'
     ACTION_CANCELED = 'ACTION_CANCELED'
 
+
+class ButtonsLocalization(Enum):
+    BACK_TO_MENU = "BACK_TO_MENU"
+    ADD_FIRST_MAP = "ADD_FIRST_MAP"
+    CANCEL_ACTION = "CANCEL_ACTION"

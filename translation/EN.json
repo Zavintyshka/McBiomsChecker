@@ -16,7 +16,10 @@
   "SUCCESSFULLY_DELETED": "The map was successfully deleted",
   "MAP_LIST": "Your map list:",
   "STANDARD_FILE_DELETED": "The standard file {file} was deleted",
-  "ACTION_CANCELED" : "Action canceled"
+  "ACTION_CANCELED" : "Action canceled",
+  "BACK_TO_MENU": "\uD83D\uDD01Back to menu\uD83D\uDD01",
+  "ADD_FIRST_MAP":"Add first map",
+  "CANCEL_ACTION": "\uD83D\uDEABCancel action\uD83D\uDEAB"
 }
 
 

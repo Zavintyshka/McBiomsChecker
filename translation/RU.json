@@ -16,5 +16,8 @@
   "SUCCESSFULLY_DELETED": "Карта была успешно удалена",
   "MAP_LIST": "Ваш список карт:",
   "STANDARD_FILE_DELETED": "Эталонный файл {file} был удален",
-  "ACTION_CANCELED" : "Действие отменено"
+  "ACTION_CANCELED": "Действие отменено",
+  "BACK_TO_MENU": "\uD83D\uDD01Назад в меню\uD83D\uDD01",
+  "ADD_FIRST_MAP": "Добавить первую карту",
+  "CANCEL_ACTION": "\uD83D\uDEABОтменить действие\uD83D\uDEAB"
 }

@@ -3,7 +3,7 @@ from core.types import *
 from json import load
 
 
-def get_locale(message: MessageHandlersAnswers | CallbackQueriesAnswers
+def get_locale(message: MessageHandlersAnswers | CallbackQueriesAnswers | ButtonsLocalization
                , language: AvailableLanguages) -> str:
     """Returns localized text"""
     translate_file_path = PATH_TO_TRANSLATE + language.value + '.json'

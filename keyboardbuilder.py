@@ -1,4 +1,6 @@
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
+from core.types import AvailableLanguages, ButtonsLocalization
+from locale import get_locale
 
 
 def make_reg_inline_keyboard() -> InlineKeyboardBuilder:
@@ -46,25 +48,28 @@ def make_advancement_list_keyboard(advancement_list: list[tuple]) -> InlineKeybo
     return builder
 
 
-def back_keyboard() -> InlineKeyboardBuilder:
+def back_keyboard(language: AvailableLanguages) -> InlineKeyboardBuilder:
     """Creates an inline-keyboard with back button"""
     builder = InlineKeyboardBuilder()
-    btn = InlineKeyboardButton(text='🔁назад в меню🔁', callback_data='back_to_menu')
+    text = get_locale(ButtonsLocalization.BACK_TO_MENU, language)
+    btn = InlineKeyboardButton(text=text, callback_data='back_to_menu')
     builder.add(btn)
     return builder
 
 
-def first_map_keyboard() -> InlineKeyboardBuilder:
+def first_map_keyboard(language: AvailableLanguages) -> InlineKeyboardBuilder:
     """Creates an inline-keyboard with "add map" button """
     builder = InlineKeyboardBuilder()
-    btn = InlineKeyboardButton(text='Добавить первую карту', callback_data='first_map')
+    text = get_locale(ButtonsLocalization.ADD_FIRST_MAP, language)
+    btn = InlineKeyboardButton(text=text, callback_data='first_map')
     builder.add(btn)
     return builder
 
 
-def make_cancel_button() -> InlineKeyboardBuilder:
+def make_cancel_button(language: AvailableLanguages) -> InlineKeyboardBuilder:
     """Creates an inline-keyboard with cancel button"""
     builder = InlineKeyboardBuilder()
-    cancel_btn = InlineKeyboardButton(text='🚫Отменить действие', callback_data='cancel')
+    text = get_locale(ButtonsLocalization.CANCEL_ACTION, language)
+    cancel_btn = InlineKeyboardButton(text=text, callback_data='cancel')
     builder.add(cancel_btn)
     return builder

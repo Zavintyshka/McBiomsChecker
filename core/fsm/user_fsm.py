@@ -8,6 +8,7 @@ from bot_initialize import bot
 from db_funcs import user_db, maps_db
 from settings import PATH_TO_TEMP_FILES
 from keyboardbuilder import make_cancel_button
+from core.types import AvailableLanguages
 
 
 __all__ = ['registrate_user_fsm_handlers', 'add_map']
@@ -20,8 +21,8 @@ class AddMap(StatesGroup):
     json_file = State()
 
 
-async def add_map(msg_or_callback: Message | CallbackQuery, state: FSMContext):
-    builder = make_cancel_button()
+async def add_map(msg_or_callback: Message | CallbackQuery, state: FSMContext, language: AvailableLanguages):
+    builder = make_cancel_button(language)
     if isinstance(msg_or_callback, CallbackQuery):
         tg_id = msg_or_callback.from_user.id
         if user_db.is_user_exists(tg_id):
@@ -37,21 +38,21 @@ async def add_map(msg_or_callback: Message | CallbackQuery, state: FSMContext):
             await msg_or_callback.answer('Сначала используйте команду /start перед добавлением карт или кнопкой снизу')
 
 
-async def map_version(msg: Message, state: FSMContext):
+async def map_version(msg: Message, state: FSMContext, language: AvailableLanguages):
     await state.update_data(map_name=msg.text)
-    builder = make_cancel_button()
+    builder = make_cancel_button(language)
     await msg.answer('Введите версию игры', reply_markup=builder.as_markup())
     await state.set_state(AddMap.map_version)
 
 
-async def json_file(msg: Message, state: FSMContext):
-    builder = make_cancel_button()
+async def json_file(msg: Message, state: FSMContext, language: AvailableLanguages):
+    builder = make_cancel_button(language)
     await state.update_data(map_version=msg.text)
     await msg.answer('Загрузите json_file вашей карты', reply_markup=builder.as_markup())
     await state.set_state(AddMap.json_file)
 
 
-async def end_add_map(msg: Message, state: FSMContext):
+async def end_add_map(msg: Message, state: FSMContext, language: AvailableLanguages):
     await state.update_data(json_file=msg.document.file_id)
     map_data = await state.get_data()
     tg_id = msg.from_user.id
