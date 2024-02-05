@@ -21,8 +21,11 @@ dp = Dispatcher()
 dp.startup.register(start_bot)
 dp.shutdown.register(shutdown)
 
+# MiddleWares
 dp.message.middleware.register(LanguageMiddleware())
+dp.callback_query.middleware.register(LanguageMiddleware())
 
+# Handlers
 registrate_admin_fsm_handlers(dp)
 registrate_user_fsm_handlers(dp)
 registrate_message_handlers(dp)

@@ -22,23 +22,24 @@ async def language_buttons(callback: CallbackQuery):
 
     if user_db.is_user_exists(tg_id):
         user_db.change_language(tg_id, language)
-        answer = get_locale(MessageAnswers.CHOSEN_LANGUAGE, AvailableLanguages(language))
+        answer = get_locale(MessageHandlersAnswers.CHOSEN_LANGUAGE, AvailableLanguages(language))
         await callback.message.delete()
         await callback.message.answer(answer.format(language=language))
     else:
         user_db.create_user(tg_id, language, tg_id in ADMIN_ID_SET)
         await callback.message.delete()
-        answer = get_locale(MessageAnswers.CHOSEN_LANGUAGE_HINT, AvailableLanguages(language))
+        answer = get_locale(MessageHandlersAnswers.CHOSEN_LANGUAGE_HINT, AvailableLanguages(language))
         await callback.message.answer(answer)
 
 
-async def info_about_maps_buttons(callback: CallbackQuery):
+async def info_about_maps_buttons(callback: CallbackQuery, language: AvailableLanguages):
     _, map_uuid, map_version = callback.data.split('_')
     builder = back_keyboard()
     try:
         game_data = load_bioms_list(PATH_TO_MC_BIOMS + admin_db.get_game_file_path(map_version))
     except IndexError:
-        await callback.message.answer(f"К сожалению, в нашей базе данных нет Minecraft версии {map_version}")
+        answer = get_locale(CallbackQueriesAnswers.NO_THIS_MC_VERSION, language)
+        await callback.message.answer(answer.format(map_version=map_version))
     else:
         player_data = load_bioms_list(PATH_TO_PLAYERS_PROGRESS + map_uuid + '.json')
         explored = game_data.intersection(player_data)
@@ -48,23 +49,25 @@ async def info_about_maps_buttons(callback: CallbackQuery):
         await callback.message.answer(**content.as_kwargs(), reply_markup=builder.as_markup())
 
 
-async def delete_map_buttons(callback: CallbackQuery):
+async def delete_map_buttons(callback: CallbackQuery, language: AvailableLanguages):
     _, map_uuid, _ = callback.data.split('_')
     maps_db.delete_map(map_uuid)
     path = PATH_TO_PLAYERS_PROGRESS + map_uuid + '.json'
     delete_file(path)
     await callback.message.delete()
-    await callback.message.answer('Карта успешно удалена')
+    answer = get_locale(CallbackQueriesAnswers.SUCCESSFULLY_DELETED, language)
+    await callback.message.answer(answer)
 
 
-async def back_to_map_list(callback: CallbackQuery):
+async def back_to_map_list(callback: CallbackQuery, language: AvailableLanguages):
     tg_id = callback.from_user.id
     response = maps_db.get_map_list(tg_id)
     builder = make_map_list_keyboard(response, 'map-list')
-    await callback.message.edit_text('Ваш список карт:', reply_markup=builder.as_markup())
+    answer = get_locale(CallbackQueriesAnswers.MAP_LIST, language)
+    await callback.message.edit_text(answer, reply_markup=builder.as_markup())
 
 
-async def delete_record_buttons(callback: CallbackQuery):
+async def delete_record_buttons(callback: CallbackQuery, language: AvailableLanguages):
     _, game_version, file = callback.data.split('+')
     path = PATH_TO_MC_BIOMS + file
     delete_file(path)
@@ -73,13 +76,15 @@ async def delete_record_buttons(callback: CallbackQuery):
     db_logger.info(f'The standard record {game_version=} has been deleted by admin id={callback.from_user.id}')
     db_logger.info(f'The standard file {game_version=} has been deleted by admin id={callback.from_user.id}')
     await callback.message.delete()
-    await callback.message.answer(f'Эталонный файл {file} был удален')
+    answer = get_locale(CallbackQueriesAnswers.STANDARD_FILE_DELETED, language)
+    await callback.message.answer(answer.format(file=file))
 
 
-async def reset_fsm_button(callback: CallbackQuery, state: FSMContext):
+async def reset_fsm_button(callback: CallbackQuery, state: FSMContext, language: AvailableLanguages):
     await state.clear()
     await callback.message.delete()
-    await callback.answer('Действие отменено')
+    answer = get_locale(CallbackQueriesAnswers.ACTION_CANCELED, language)
+    await callback.answer(answer)
 
 
 async def first_map_btn(callback: CallbackQuery, state: FSMContext):
