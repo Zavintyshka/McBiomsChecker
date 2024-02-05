@@ -12,19 +12,18 @@ BOT_LOGGER_FILE_NAME = 'BotLogs.log'
 DB_LOGGER_FILE_NAME = 'dbLogs.log'
 FILE_LOGGER_FILE_AME = 'FileLogs.log'
 
-
 # PATHS
 BASE_DIR = 'files/'
+PATH_TO_TRANSLATE = 'translation/'
 DB_PATH = BASE_DIR + DB_NAME
 PATH_TO_MC_BIOMS = BASE_DIR + 'game_bioms/'
 PATH_TO_PLAYERS_PROGRESS = BASE_DIR + 'player_maps/'
 PATH_TO_LOGS = BASE_DIR + 'logs/'
 PATH_TO_TEMP_FILES = BASE_DIR + 'temp/'
 
-
 # MISC
 ENV_FILE = BASE_DIR + '.env'
-LANGUAGE = 'RU'
+DEFAULT_LANGUAGE = 'EN'
 DEBUG = True  # Debug mode for additional logs with INFO logging level
 MOD = 10
 VANILLA = 0

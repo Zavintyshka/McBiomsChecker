@@ -8,20 +8,28 @@ from general_funcs import load_bioms_list, generate_content, delete_file
 from aiogram.fsm.context import FSMContext
 from core.fsm import *
 
+from core.in_memory_store import redis_client
+from core.types import *
+from locale import get_locale
+
 __all__ = ['registrate_callback_handlers']
 
 
 async def language_buttons(callback: CallbackQuery):
     tg_id = str(callback.from_user.id)
     _, language = callback.data.split('_')
+    redis_client.set(name=f'tg_id:{tg_id}', value=language)
+
     if user_db.is_user_exists(tg_id):
         user_db.change_language(tg_id, language)
-        await callback.message.answer(f'Вы выбрали язык {language}')
+        answer = get_locale(MessageAnswers.CHOSEN_LANGUAGE, AvailableLanguages(language))
+        await callback.message.delete()
+        await callback.message.answer(answer.format(language=language))
     else:
         user_db.create_user(tg_id, language, tg_id in ADMIN_ID_SET)
         await callback.message.delete()
-        await callback.message.answer(
-            'Самое время добавить карту с помощью команды /add_map')
+        answer = get_locale(MessageAnswers.CHOSEN_LANGUAGE_HINT, AvailableLanguages(language))
+        await callback.message.answer(answer)
 
 
 async def info_about_maps_buttons(callback: CallbackQuery):

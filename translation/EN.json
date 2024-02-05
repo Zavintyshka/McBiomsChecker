@@ -1,0 +1,17 @@
+{
+  "CHANGE_LANGUAGE_MSG": "Choose a language:",
+  "CHOSEN_LANGUAGE": "You have chosen {language} language",
+  "CHOSEN_LANGUAGE_HINT": "It's time to add a map using the /add_map command",
+  "ALREADY_AUTHORIZED": "You're already logged in. Если вы хотите сменить язык, используйте /change_language команду.",
+  "GREETINGS_MSG": "Hi, I'm a bot that will help you complete <b>Adventuring Time</b> achievement.",
+  "SELECT_LANGUAGE": "Select a language:",
+  "HELP_MSG": "- The bot allows you to track your progress in completing the achievement <b>Adventure Time</b>. First, find your map on the computer.\n\n- <b>Standard paths:</b>\n\uD83E\uDE9F<b>Windows:</b> C:\\Users \\*username*\\Appdata\\Roaming\\.minecraft\\saves\n\uD83C\uDF4E<b>macOS:</b> /Users/*username*/Library/Application Support/minecraft/saves\n\nThen in the saves folder you'll see the <b>advancements folder</b>, which contains a <b>json-file</b> with your information. This file must be drag and drop to the bot when executing the /add_map command. After that, you can find out which biomes you need to find and which ones you have already found.",
+  "NO_MAP_LETS_ADD_MSG": "It looks like you don't have any added maps yet \uD83D\uDE1C.\nIt's time to add them.",
+  "YOUR_MAP_LIST": "Your list of map:",
+  "SELECT_MAP_FOR_DELETING": "Select map for deleting:",
+  "NO_MAP_FOR_DELETING": "It looks like you don't have any maps to delete yet.",
+  "SELECT_STANDARD_MAP_FOR_DELETING": "Select standard map for deleting",
+  "YOURE_NOT_AN_ADMIN": "You're not an admin to use this command"
+}
+
+
