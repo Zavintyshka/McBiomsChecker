@@ -4,7 +4,7 @@ from json import load
 
 
 def get_locale(
-        message: MessageHandlersAnswers | CallbackQueriesAnswers | ButtonsLocalization | UserFSMLocalization | AdminFSMLocalization
+        message: MessageHandlersAnswers | CallbackQueriesAnswers | ButtonsLocalization | UserFSMLocalization | AdminFSMLocalization | InfoMessage
         , language: AvailableLanguages) -> str:
     """Returns localized text"""
     translate_file_path = PATH_TO_TRANSLATE + language.value + '.json'

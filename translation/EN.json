@@ -27,7 +27,12 @@
   "MAP_SUCCESSFULLY_ADDED": "Map was successfully added",
   "INPUT_STANDARD_JSON": "Input the standard json-file",
   "STANDARD_FILE_ALREADY_EXISTS": "You're trying to add the standard map version of {_game_version} that already exists.\nAction canceled",
-  "STANDARD_FILE_SUCCESSFULLY_ADDED": "The standard file {_game_version} was successfully added"
+  "STANDARD_FILE_SUCCESSFULLY_ADDED": "The standard file {_game_version} was successfully added",
+  "GENERAL_PROGRESS": "General Progress:\n",
+  "QTY_EXPLORED_BIOMS": "Number of explored bioms - {explored_bioms}",
+  "QTY_UNEXPLORED_BIOM": "Number of unexplored bioms - {unexplored_bioms}",
+  "EXPLORED_BIOMS": "Explored Bioms:\n",
+  "UNEXPLORED_BIOM": "Unexplored Bioms:\n"
 }
 
 

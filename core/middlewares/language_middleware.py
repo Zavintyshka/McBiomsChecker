@@ -27,7 +27,6 @@ class LanguageMiddleware(BaseMiddleware):
 
         if redis_response:
             self.language: str = redis_response.decode()
-            print("Язык из памяти")
         else:
             try:
                 user_language: AvailableLanguages | None = user_db.get_user_language(self.tg_id)

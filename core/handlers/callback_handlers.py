@@ -44,7 +44,7 @@ async def info_about_maps_buttons(callback: CallbackQuery, language: AvailableLa
         player_data = load_bioms_list(PATH_TO_PLAYERS_PROGRESS + map_uuid + '.json')
         explored = game_data.intersection(player_data)
         unexplored = game_data.difference(player_data)
-        content = generate_content(explored, unexplored)
+        content = generate_content(explored, unexplored, language)
         await callback.message.delete()
         await callback.message.answer(**content.as_kwargs(), reply_markup=builder.as_markup())
 

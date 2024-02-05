@@ -27,5 +27,10 @@
   "MAP_SUCCESSFULLY_ADDED": "Карта была успешно добавлена",
   "INPUT_STANDARD_JSON": "Перетащите эталонный json-файл",
   "STANDARD_FILE_ALREADY_EXISTS": "Вы пытаетесь добавить эталон версии {_game_version}, которая уже существует.\nДействие отменено",
-  "STANDARD_FILE_SUCCESSFULLY_ADDED": "Эталонный файл с версией {_game_version} был успешно добавлен"
+  "STANDARD_FILE_SUCCESSFULLY_ADDED": "Эталонный файл с версией {_game_version} был успешно добавлен",
+  "GENERAL_PROGRESS": "Общий прогресс:\n",
+  "QTY_EXPLORED_BIOMS": "Количество найденных биомов - {explored_bioms}",
+  "QTY_UNEXPLORED_BIOM": "Количество ненайденных биомов - {unexplored_bioms}",
+  "EXPLORED_BIOMS": "Найденные биомы:\n",
+  "UNEXPLORED_BIOM": "Ненайденные биомы:\n"
 }
