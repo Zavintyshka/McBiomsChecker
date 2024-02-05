@@ -19,5 +19,10 @@
   "ACTION_CANCELED": "Действие отменено",
   "BACK_TO_MENU": "\uD83D\uDD01Назад в меню\uD83D\uDD01",
   "ADD_FIRST_MAP": "Добавить первую карту",
-  "CANCEL_ACTION": "\uD83D\uDEABОтменить действие\uD83D\uDEAB"
+  "CANCEL_ACTION": "\uD83D\uDEABОтменить действие\uD83D\uDEAB",
+  "INPUT_MAP_NAME": "Введите название вашей карты",
+  "USE_START_COMMAND_BEFORE": "Сначала используйте команду /start перед добавлением карт или кнопкой снизу",
+  "INPUT_MAP_VERSION": "Введите версию карты",
+  "INPUT_MAP_JSON": "Перетащите json-файл",
+  "MAP_SUCCESSFULLY_ADDED": "Карта была успешно добавлена"
 }
