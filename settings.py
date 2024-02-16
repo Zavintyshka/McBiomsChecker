@@ -25,8 +25,6 @@ PATH_TO_TEMP_FILES = BASE_DIR + 'temp/'
 ENV_FILE = BASE_DIR + '.env'
 DEFAULT_LANGUAGE = 'EN'
 DEBUG = True  # Debug mode for additional logs with INFO logging level
-MOD = 10
-VANILLA = 0
 
 # put admin tg id here.
 ADMIN_ID_SET = {'720262392'}

@@ -35,7 +35,8 @@ def get_bioms_list(advancement_file_path: str):
     """Функция, которая создает список биомов на основе переданного json-файла"""
     with open(advancement_file_path, 'r') as advancements:
         bioms_row = load(advancements)['minecraft:adventure/adventuring_time']['criteria'].keys()
-        bioms_list = [biom[MOD:] for biom in bioms_row]
+        # TODO Проверить работает или нет
+        bioms_list = [biom.replace('minecraft:', '') for biom in bioms_row]
     delete_file(advancement_file_path)
     return bioms_list
 
