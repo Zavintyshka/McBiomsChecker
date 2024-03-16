@@ -43,7 +43,7 @@ class LanguageMiddleware(BaseMiddleware):
         self.language = user_language.value if isinstance(user_language,
                                                           AvailableLanguages) else self.language_from_tg.upper()
 
-        redis_record = redis_client.set(name=f'tg_id:{self.tg_id}', value=self.language)
+        redis_record = redis_client.set(name=f'tg_id:{self.tg_id}', value=self.language, ex=600)
         print(f'tg_id={self.tg_id} -- {self.language}')
 
     async def check_support_language(self) -> AvailableLanguages:
