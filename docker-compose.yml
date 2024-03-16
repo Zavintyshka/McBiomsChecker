@@ -1,20 +1,23 @@
 version: "3.8"
 services:
   tg-bot:
-    image: aiogram_bot:0.1
+    build:
+      context: .
+      dockerfile: dockerfile
     container_name: tg-bot
     volumes:
       - /Users/vadimsosnin/Desktop/MCBiomsChecker:/source/
-    environment:
-      - TELEGRAM_TOKEN=6924062403:AAG_bZ2jhjNo5Ahmriz128zAuINmBkbgal4
+    env_file:
+      - .env
     networks:
       - MCbot_network
+    command: ["python3", "start_bot.py"]
     depends_on:
       - redis
-    command: ["python3", "/source/start_bot.py"]
 
   redis:
     image: redis:latest
+    container_name: redis
     networks:
       - MCbot_network
     ports:
@@ -24,9 +27,3 @@ networks:
   MCbot_network:
     name: MCbot_network
     driver: bridge
-
-
-
-
-
-
