@@ -3,10 +3,10 @@ services:
   tg-bot:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     container_name: tg-bot
     volumes:
-      - /Users/vadimsosnin/Desktop/MCBiomsChecker:/source/
+      - .:/source/
     env_file:
       - .env
     networks:

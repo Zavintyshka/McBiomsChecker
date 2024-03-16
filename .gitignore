@@ -2,7 +2,3 @@
 .idea
 __pycache__
 files/mc_bioms_checker
-files/game_bioms/*
-files/logs/*
-files/player_maps/*
-files/temp/*
