@@ -19,7 +19,6 @@ async def new_user(msg: Message, language: AvailableLanguages):
     else:
         answer = get_locale(MessageHandlersAnswers.GREETINGS_MSG, language)
         await msg.answer(answer)
-        await msg.answer_animation('CgACAgIAAxkBAAIEImWlDVVMAc7p_YX5YuESYKSRwWB_AAK9QAACEzooSVjNCvuQxg3JNAQ')
         builder = make_reg_inline_keyboard()
         answer = get_locale(MessageHandlersAnswers.SELECT_LANGUAGE, language)
         await msg.answer(answer, reply_markup=builder.as_markup())

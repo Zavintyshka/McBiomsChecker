@@ -1,10 +1,23 @@
 import sqlite3 as sq
+from os.path import exists
 from uuid import uuid1
 from settings import *
 from general_funcs import make_bioms_list, get_bioms_list
 from logger import db_logger, admin_logger
-
 from core.types import AvailableLanguages
+
+
+def initialize_db():
+    """If it's first time DB init then needs to create tables"""
+    db_connection = sq.connect(DB_PATH)
+    cur = db_connection.cursor()
+    cur.execute(f'CREATE TABLE {DB_ADMIN_TABLE_NAME}(game_version varchar(15) UNIQUE ,path_to_json varchar(100))')
+    cur.execute(
+        f'CREATE TABLE {DB_USER_TABLE_NAME} (user_uuid varchar(36) PRIMARY KEY, tg_id varchar(9) UNIQUE, user_language varchar(2), admin  bool)')
+    cur.execute(
+        f'CREATE TABLE {DB_USER_MAP_TABLE_NAME} (map_uuid varchar(36) PRIMARY KEY, map_name varchar(50) UNIQUE, user_uuid varchar(36), map_version varchar(10), FOREIGN KEY (user_uuid) REFERENCES users (user_uuid))')
+    db_connection.commit()
+    db_connection.close()
 
 
 class DbInterface:
@@ -136,6 +149,10 @@ class MapsDB(DbInterface):
         response = self.base.execute(query).fetchall()
         return response
 
+
+if not exists(DB_PATH):
+    db_logger.info("DB initialized for the first time")
+    initialize_db()
 
 user_db = UserDB()
 maps_db = MapsDB()

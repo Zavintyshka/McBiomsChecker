@@ -26,5 +26,5 @@ ENV_FILE = BASE_DIR + '.env'
 DEFAULT_LANGUAGE = 'EN'
 DEBUG = True  # Debug mode for additional logs with INFO logging level
 
-# put admin tg id here.
-ADMIN_ID_SET = {'720262392'}
+# put admins tg id here.
+ADMIN_ID_SET: tuple[str] = {}
