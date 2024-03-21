@@ -3,7 +3,8 @@ ___
 # RU :ru:
 
 ## Описание
-![adventuring_time_logo](https://private-user-images.githubusercontent.com/116081113/313502647-3ce53ae5-339c-49e9-a0c5-89c938338589.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTA3MDc1NzcsIm5iZiI6MTcxMDcwNzI3NywicGF0aCI6Ii8xMTYwODExMTMvMzEzNTAyNjQ3LTNjZTUzYWU1LTMzOWMtNDllOS1hMGM1LTg5YzkzODMzODU4OS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwMzE3JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDMxN1QyMDI3NTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1jNjkyZTllZGE1ZDYwZTFhYjdkMDg3MTQzYjExYTczYTc4OTZmMjA2YTM1MzFlMGVhYmQzZjMyYTYwNDM0NzVjJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.ji2HxvTUYOMw2rgRAgNXl8MzcDf7xPb0xoFJxAkNJ4M)
+![Adventuring Time Logo](https://raw.githubusercontent.com/Zavintyshka/McBiomsChecker/assets/adventuring_time_logo.png)
+
 
 Данный телеграм-бот помогает найти ненайденные биомы и составить статистику по биомам, чтобы 
 быстро и легко выполнить достижение __Adventuring Time__. 
@@ -58,7 +59,7 @@ TELEGRAM_TOKEN=some_token123
 Вы также можете изменить название таблиц БД, логов и другое, изменяя соответствующие имена в `setting.py`.
 ___
 ## Запуск бота
-Теперь можно перейти к самому интересному:grinning:. Чтобы, запустить бота потребуется открыть терминал и прописать
+Теперь можно перейти к самому интересному :grinning:. Чтобы, запустить бота потребуется открыть терминал и прописать
 следующие команды:
 ```bash
 cd #путь до корневой директории проекта
@@ -82,10 +83,11 @@ bot_logger [DEBUG] -- xx-xx-xxxx xx:xx:xx -- Bot started
 * /add_advancement - добавления эталона карты (Только для администраторов);
 * /delete_advancement - удаления эталона карты (Только для администраторов);
 
-![menu](https://private-user-images.githubusercontent.com/116081113/313502665-3cbfdb6a-4eaf-4bd9-9552-4c7b08aeffb6.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTA3MDc1NzcsIm5iZiI6MTcxMDcwNzI3NywicGF0aCI6Ii8xMTYwODExMTMvMzEzNTAyNjY1LTNjYmZkYjZhLTRlYWYtNGJkOS05NTUyLTRjN2IwOGFlZmZiNi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwMzE3JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDMxN1QyMDI3NTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1jYmMyNjUzZGVhMjE2MWU4NmZlZjkxYzc5YjRlN2I2ZmNmNDVhZDM2OGI1OGFkYjhkNjAxNGIxOTIzMzc5OGNkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.O0B1Vcf_kdGWsTQc_xrZqG86Wl-H2Tdds1xM5u2FGSM)
+![menu](https://raw.githubusercontent.com/Zavintyshka/McBiomsChecker/assets/menu.png)
 
 
-<img src="https://private-user-images.githubusercontent.com/116081113/313502658-17ff8208-6a31-42e7-8990-0aae7f9e74a8.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTA3MDc1NzcsIm5iZiI6MTcxMDcwNzI3NywicGF0aCI6Ii8xMTYwODExMTMvMzEzNTAyNjU4LTE3ZmY4MjA4LTZhMzEtNDJlNy04OTkwLTBhYWU3ZjllNzRhOC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwMzE3JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDMxN1QyMDI3NTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iOGI0MTJiNmYzOTA4MWM2YjA5NTVlMmFkZTY2YWU2OGVmODhiYjViMGNmYjA3NzA0NTE4NWQwMTA1ZWUxNmQ1JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.zO2QI2T22j_Pft3gUox1r4xhxN0lZecOP8dDfEaMgJc" width="285" height="800">
+
+<img src="https://raw.githubusercontent.com/Zavintyshka/McBiomsChecker/assets/Progress.png" width="285" height="800">
 
 ---
 
@@ -94,7 +96,7 @@ ___
 # EN :us:
 
 ## Description
-![adventuring_time_logo](https://private-user-images.githubusercontent.com/116081113/313502647-3ce53ae5-339c-49e9-a0c5-89c938338589.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTA3MDc1NzcsIm5iZiI6MTcxMDcwNzI3NywicGF0aCI6Ii8xMTYwODExMTMvMzEzNTAyNjQ3LTNjZTUzYWU1LTMzOWMtNDllOS1hMGM1LTg5YzkzODMzODU4OS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwMzE3JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDMxN1QyMDI3NTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1jNjkyZTllZGE1ZDYwZTFhYjdkMDg3MTQzYjExYTczYTc4OTZmMjA2YTM1MzFlMGVhYmQzZjMyYTYwNDM0NzVjJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.ji2HxvTUYOMw2rgRAgNXl8MzcDf7xPb0xoFJxAkNJ4M)
+![Adventuring Time Logo](https://raw.githubusercontent.com/Zavintyshka/McBiomsChecker/assets/adventuring_time_logo.png)
 
 This Telegram bot helps to find undiscovered biomes and compile statistics on biomes to quickly and easily achieve the __Adventuring Time__ achievement. The Telegram bot allows uploading templates of different versions that will be compared with user maps. Users can upload multiple maps and track their progress using a convenient menu interface and navigate through it using inline buttons.
 
